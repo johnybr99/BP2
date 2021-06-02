@@ -1,5 +1,4 @@
 ﻿using Military.Database;
-using Military.Models;
 using Military.Utils;
 using System;
 using System.Collections.Generic;
@@ -13,33 +12,24 @@ using System.Windows.Input;
 
 namespace Military.ViewModels
 {
-    public class CreateEmployeeViewModel : INotifyPropertyChanged
+    public class EmployeeDetailsViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         private Visibility soldierFieldsVisible;
         private Visibility medicFieldsVisible;
-        private EmployeeTypeModel type;
-        private MilitaryPersonTypeModel militaryType;
         private string jmbgText;
         private string name;
         private string surname;
-        private string licenseNo;
         private List<Rank> soldierRanks;
         private Rank soldierRanksSelected;
-        MilitaryContainer mc = new MilitaryContainer();
+        private bool editEnabled;
         public Action CloseAction { get; set; }
-        public CreateEmployeeViewModel()
-        {
-        }
 
-        public CreateEmployeeViewModel(EmployeeTypeModel empType, MilitaryPersonTypeModel milType)
+        MilitaryContainer mc = new MilitaryContainer();
+        public EmployeeDetailsViewModel()
         {
-            type = empType;
-            militaryType = milType;
-            SetFields(type, militaryType);
-            SoldierRanks = populateRanks();
 
         }
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public Visibility SoldierFieldsVisible
         {
@@ -64,6 +54,31 @@ namespace Military.ViewModels
                     medicFieldsVisible = value;
                     NotifyPropertyChanged();
                 }
+            }
+        }
+        public EmployeeDetailsViewModel(Employee employee)
+        {
+            JMBGText = employee.JMBG;
+            Name = employee.Name;
+            Surname = employee.Surname;
+            SoldierFieldsVisible = Visibility.Hidden;
+            MedicFieldsVisible = Visibility.Hidden;
+        }
+
+        public EmployeeDetailsViewModel(Employee employee, string type)
+        {
+            JMBGText = employee.JMBG;
+            Name = employee.Name;
+            Surname = employee.Surname;
+            if(type == "Soldier")
+            {
+                SoldierRanks = populateRanks();
+                SoldierFieldsVisible = Visibility.Visible;
+                MedicFieldsVisible = Visibility.Hidden;
+            } else
+            {
+                SoldierFieldsVisible = Visibility.Hidden;
+                MedicFieldsVisible = Visibility.Visible;
             }
         }
 
@@ -93,6 +108,19 @@ namespace Military.ViewModels
             }
         }
 
+        public bool EditEnabled
+        {
+            get { return editEnabled; }
+            set
+            {
+                if (editEnabled != value)
+                {
+                    editEnabled = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
         public string JMBGText
         {
             get { return jmbgText; }
@@ -106,18 +134,6 @@ namespace Military.ViewModels
             }
         }
 
-        public string LicenseNo
-        {
-            get { return licenseNo; }
-            set
-            {
-                if (licenseNo != value)
-                {
-                    licenseNo = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
 
         public List<Rank> SoldierRanks
         {
@@ -144,29 +160,7 @@ namespace Military.ViewModels
                 }
             }
         }
-        private void SetFields(EmployeeTypeModel type, MilitaryPersonTypeModel MilitaryType)
-        {
-            if(type.ID == 1)
-            {
-                SoldierFieldsVisible = Visibility.Hidden;
-                MedicFieldsVisible = Visibility.Hidden;
-            } else
-            {
-                if (MilitaryType.ID == 0)
-                {
-                    SoldierFieldsVisible = Visibility.Visible;
-                    MedicFieldsVisible = Visibility.Hidden;
-                }
-                else
-                {
-                    SoldierFieldsVisible = Visibility.Hidden;
-                    MedicFieldsVisible = Visibility.Visible;
-                }
-            }
-            
-        }
 
-        public ICommand CreateEmployeeCommand { get { return new RelayCommand(createEmployee, canCreateEmployee); } }
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             if (PropertyChanged != null)
@@ -175,66 +169,61 @@ namespace Military.ViewModels
             }
         }
 
-        private void createEmployee(object param)
+        public ICommand EnableEditFields { get { return new RelayCommand(enableEdit, canEnableEdit); } }
+
+        private void enableEdit(object param)
+        {
+            EditEnabled = true;
+        }
+
+        private bool canEnableEdit(object param)
+        {
+            return true;
+        }
+
+        public ICommand EditEmployee { get { return new RelayCommand(completeEdit, canExecuteEdit); } }
+
+        private void completeEdit(object param)
         {
             if (!string.IsNullOrEmpty(JMBGText) && !string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Surname))
             {
-                if (mc.Employees.Select(x => x.JMBG).Contains(JMBGText))
+                
+                if (SoldierFieldsVisible == Visibility.Visible)
                 {
-                    return;
+                    var soldier = mc.Soldiers.FirstOrDefault(x => x.JMBG == JMBGText);
+                    soldier.Name = Name;
+                    soldier.Surname = Surname;
+                    if (SoldierRanksSelected != null)
+                        soldier.Rank = SoldierRanksSelected;
                 }
-                if (type.ID == 1)
+                else if(MedicFieldsVisible == Visibility.Visible)
                 {
-                    mc.Employees.Add(new SupportPerson { Name = Name, Surname = Surname, JMBG = JMBGText });
-                }
-                else
+                    var medic = mc.Medics.FirstOrDefault(x => x.JMBG == JMBGText);
+                    medic.Name = Name;
+                    medic.Surname = Surname;
+                } else
                 {
-                    if (militaryType.ID == 0 && SoldierRanksSelected != null)
-                    {
-
-                        mc.Employees.Add(new Soldier
-                        {
-                            Name = Name,
-                            Surname = Surname,
-                            JMBG = JMBGText,
-                            Rank = mc.Ranks.FirstOrDefault(x => x.Name == SoldierRanksSelected.Name),
-                            CampId = 3
-                        });
-
-                    } else if(militaryType.ID == 1 && LicenseNo != null)
-                    {
-                        mc.Employees.Add(new Medic
-                        {
-                            Name = Name,
-                            Surname = Surname,
-                            JMBG = JMBGText,
-                            LicenseNo = LicenseNo,
-                            CampId = 3
-                        });
-                    }
+                    var employee = mc.Employees.FirstOrDefault(x => x.JMBG == JMBGText);
+                    employee.Name = Name;
+                    employee.Surname = Surname;
                 }
+                
                 mc.SaveChanges();
                 CloseAction();
-            } else
-            {
-                return;
             }
-            
         }
 
-        private bool canCreateEmployee(object param)
+        private bool canExecuteEdit(object param)
         {
             return true;
         }
 
         private List<Rank> populateRanks()
         {
-            var ranks = new List<Rank>();
 
-            ranks = mc.Ranks.ToList();
+            var ranks = mc.Ranks.ToList();
 
             return ranks;
         }
-
     }
 }

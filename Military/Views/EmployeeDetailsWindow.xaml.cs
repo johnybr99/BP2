@@ -1,4 +1,5 @@
-﻿using Military.ViewModels;
+﻿using Military.Database;
+using Military.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,25 @@ namespace Military.Views
         public EmployeeDetailsWindow()
         {
             InitializeComponent();
-            this.Loaded += (s, e) => { this.DataContext = new MainWindowViewModel(); };
+            this.Loaded += (s, e) => { this.DataContext = new EmployeeDetailsViewModel(); };
+        }
+
+        public EmployeeDetailsWindow(Employee employee)
+        {
+            InitializeComponent();
+            var vm = new EmployeeDetailsViewModel(employee);
+            this.Loaded += (s, e) => { this.DataContext = vm; };
+            if (vm.CloseAction == null)
+                vm.CloseAction = new Action(this.Close);
+        }
+
+        public EmployeeDetailsWindow(Employee employee, string type)
+        {
+            InitializeComponent();
+            var vm = new EmployeeDetailsViewModel(employee, type);
+            this.Loaded += (s, e) => { this.DataContext = vm; };
+            if (vm.CloseAction == null)
+                vm.CloseAction = new Action(this.Close);
         }
     }
 }

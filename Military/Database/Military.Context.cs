@@ -33,5 +33,7 @@ namespace Military.Database
         public virtual DbSet<Rank> Ranks { get; set; }
         public virtual DbSet<Equipment> Equipments { get; set; }
         public virtual DbSet<MilitaryPerson> MilitaryPersons { get; set; }
+        public virtual DbSet<Soldier> Soldiers { get; set; }
+        public virtual DbSet<Medic> Medics { get; set; }
     }
 }

@@ -6,12 +6,16 @@
         xmlns:local="clr-namespace:Military.Views"
         xmlns:models="clr-namespace:Military.Database"
         mc:Ignorable="d"
-        Title="Employee Details" Height="300" Width="300"
+        Title="Employee Details" Height="450" Width="300"
         WindowStartupLocation="CenterScreen">
     <DockPanel>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button MinHeight="30" MaxHeight="30" MinWidth="100" Margin="20">Edit</Button>
-            <Button MinHeight="30" MaxHeight="30" MinWidth="100" Margin="20" IsEnabled="False">Confirm</Button>
+            <Button MinHeight="30" MaxHeight="30" MinWidth="100" Margin="20"
+            Command="{Binding EnableEditFields}">
+                Edit</Button>
+            <Button MinHeight="30" MaxHeight="30" MinWidth="100" Margin="20"
+                    Command="{Binding EditEmployee}"
+                    IsEnabled="{Binding EditEnabled}">Confirm</Button>
         </StackPanel>
         <Grid Margin="20" DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
@@ -50,7 +54,7 @@
                                 Grid.Column="1"
                                 Margin="30,0,0,0"
                                 Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                IsEnabled="False">
+                                IsEnabled="{Binding EditEnabled}">
             </TextBox>
             <Border
                                 Grid.Row="4"
@@ -62,30 +66,30 @@
                                 Grid.Column="1"
                                 Grid.Row="4"
                                 Text="{Binding Path=Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="30,0,0,0" VerticalAlignment="Top"
-                                IsEnabled="False">
+                                IsEnabled="{Binding EditEnabled}">
             </TextBox>
             <Border
                                 Grid.Row="6"
                                 Grid.Column="0">
                 <TextBlock 
                                 Text="Rank"
-                                Visibility="Visible"/>
+                                Visibility="{Binding SoldierFieldsVisible}"/>
             </Border>
             <Border
                                 Grid.Row="6"
                                 Grid.Column="0">
                 <TextBlock 
                                 Text="Specialty"
-                                Visibility="Hidden"/>
+                                Visibility="{Binding MedicFieldsVisible}"/>
             </Border>
             <ComboBox
                                 Grid.Column="1"
                                 Grid.Row="6"
-                                ItemsSource="{Binding SoldierRank}"
-                                SelectedItem="{Binding SoldierRankSelected, Mode=TwoWay}"
+                                ItemsSource="{Binding SoldierRanks}"
+                                SelectedItem="{Binding SoldierRanksSelected, Mode=TwoWay}"
                                 DisplayMemberPath="Name" Height="25" Margin="30,0,0,0" VerticalAlignment="Top"
-                                IsEnabled="False"
-                                Visibility="Visible">
+                                IsEnabled="{Binding EditEnabled}"
+                                Visibility="{Binding SoldierFieldsVisible}">
             </ComboBox>
 
             <ComboBox
@@ -94,11 +98,24 @@
                                 ItemsSource="{Binding MedicSpecialty}"
                                 SelectedItem="{Binding MedicSpecialtySelected, Mode=TwoWay}"
                                 DisplayMemberPath="Name" Height="25" Margin="30,0,0,0" VerticalAlignment="Top"
-                                IsEnabled="False"
-                                Visibility="Hidden">
+                                IsEnabled="{Binding EditEnabled}"
+                                Visibility="{Binding MedicFieldsVisible}">
             </ComboBox>
+            <Border
+                                Grid.Row="8"
+                                Grid.Column="0">
+                <TextBlock 
+                                Text="LicenseNo"
+                                Visibility="{Binding MedicFieldsVisible}"/>
+            </Border>
+            <TextBox
+                                Grid.Column="1"
+                                Grid.Row="8"
+                                Text="{Binding Path=LicenseNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="30,0,0,0" VerticalAlignment="Top"
+                                IsEnabled="False"
+                                Visibility="{Binding MedicFieldsVisible}">
+            </TextBox>
 
         </Grid>
-        <Border></Border>
     </DockPanel>
 </Window>

@@ -47,6 +47,18 @@
                                 MinWidth="100"
                                 Command="{Binding EmployeeDetailsWindowCommand}"
                                 Margin="10,0,10,0"/>
+                            <Button
+                                Content="Delete"
+                                MinWidth="100"
+                                IsEnabled="{Binding EmployeeSelected}"
+                                Command="{Binding EmployeeDelete}"
+                                Margin="10,0,10,0"/>
+                            <Button
+                                Content="New Examination"
+                                MinWidth="100"
+                                IsEnabled="{Binding EmployeeSelected}"
+                                Command="{Binding NewExaminationWindow}"
+                                Margin="10,0,10,0"/>
                         </StackPanel>
                         <ListView
                             ItemsSource="{Binding EmployeesSource}"

@@ -1,0 +1,90 @@
+﻿<Window x:Class="Military.Views.NewExaminationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Military.Views"
+        mc:Ignorable="d"
+        Title="NewExaminationWindow" Height="450" Width="300">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button
+                MinHeight="30" MaxHeight="30" MinWidth="220" Margin="20"
+                Command="{Binding CreateExamCommand}">
+                Record examination
+
+            </Button>
+        </StackPanel>
+        <Grid Margin="20" DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MinWidth="50" />
+                <ColumnDefinition MinWidth="190" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25" />
+                <RowDefinition  Height="15" />
+                <RowDefinition  Height="25" />
+                <RowDefinition  Height="15" />
+                <RowDefinition  Height="25" />
+                <RowDefinition  Height="15" />
+                <RowDefinition  Height="25" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            
+            <Border
+                                Grid.Row="0"
+                                Grid.Column="0">
+                <TextBlock 
+                                Text="Doctor"
+                                Visibility="Visible"/>
+            </Border>
+
+            <ComboBox
+                                Grid.Column="1"
+                                Grid.Row="0"
+                                ItemsSource="{Binding DoctorsSource}"
+                                SelectedItem="{Binding DoctorsSourceSelected, Mode=TwoWay}"
+                                DisplayMemberPath="LicenseNo" Height="25" Margin="30,0,0,0" VerticalAlignment="Top"
+                                Visibility="Visible">
+            </ComboBox>
+
+            <Border
+                                Grid.Row="2"
+                                Grid.Column="0">
+                <TextBlock 
+                                Text="Soldier"
+                                Visibility="Visible"/>
+            </Border>
+
+            <ComboBox
+                                Grid.Column="1"
+                                Grid.Row="2"
+                                ItemsSource="{Binding SoldiersSource}"
+                                SelectedItem="{Binding SoldiersSourceSelected, Mode=TwoWay}"
+                                DisplayMemberPath="JMBG" Height="25" Margin="30,0,0,0" VerticalAlignment="Top"
+                                Visibility="Visible">
+            </ComboBox>
+
+            <Border
+                                Grid.Row="4"
+                                Grid.Column="0">
+                <TextBlock 
+                                Text="Camp"
+                                Visibility="Visible"/>
+            </Border>
+
+            <ComboBox
+                                Grid.Column="1"
+                                Grid.Row="4"
+                                ItemsSource="{Binding CampsSource}"
+                                SelectedItem="{Binding CampsSourceSelected, Mode=TwoWay}"
+                                DisplayMemberPath="Id" Height="25" Margin="30,0,0,0" VerticalAlignment="Top"
+                                Visibility="Visible">
+            </ComboBox>
+
+
+
+        </Grid>
+        <Border></Border>
+    </DockPanel>
+</Window>

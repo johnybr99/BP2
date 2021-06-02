@@ -32,16 +32,19 @@ namespace Military.ViewModels
         }
 
         private ObservableCollection<Employee> employeesSource;
+        private Employee employeesSourceSelected;
+        private Soldier soldiersSourceSelected;
+        private Medic medicsSourceSelected;
         private string jmbg;
         private string name;
         private string surname;
-        private Rank soldierRank;
         private List<EmployeeTypeModel> employeeTypes;
         private EmployeeTypeModel employeeTypesSelected;
         private List<MilitaryPersonTypeModel> militaryPersonTypes;
         private MilitaryPersonTypeModel militaryPersonTypesSelected;
         private bool militaryComboBoxEnabled;
-        
+        private bool employeeSelected;
+
 
         public string JMBG
         {
@@ -80,19 +83,7 @@ namespace Military.ViewModels
                 }
             }
         }
-
-        public Rank SoldierRank
-        {
-            get { return soldierRank; }
-            set
-            {
-                if (soldierRank != value)
-                {
-                    soldierRank = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
+        
         public bool MilitaryComboBoxEnabled
         {
             get { return militaryComboBoxEnabled; }
@@ -106,6 +97,19 @@ namespace Military.ViewModels
             }
         }
 
+        public bool EmployeeSelected
+        {
+            get { return employeeSelected; }
+            set
+            {
+                if (employeeSelected != value)
+                {
+                    employeeSelected = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
         public List<EmployeeTypeModel> EmployeeTypes
         {
             get { return employeeTypes; }
@@ -114,6 +118,46 @@ namespace Military.ViewModels
                 if (employeeTypes != value)
                 {
                     employeeTypes = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public Employee EmployeesSourceSelected
+        {
+            get { return employeesSourceSelected; }
+            set
+            {
+                if (employeesSourceSelected != value)
+                {
+                    EmployeeSelected = true;
+                    employeesSourceSelected = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public Soldier SoldiersSourceSelected
+        {
+            get { return soldiersSourceSelected; }
+            set
+            {
+                if (soldiersSourceSelected != value)
+                {
+                    soldiersSourceSelected = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public Medic MedicsSourceSelected
+        {
+            get { return medicsSourceSelected; }
+            set
+            {
+                if (medicsSourceSelected != value)
+                {
+                    medicsSourceSelected = value;
                     NotifyPropertyChanged();
                 }
             }
@@ -186,7 +230,8 @@ namespace Military.ViewModels
             if (EmployeeTypesSelected.ID == 2)
             {
                 return false;
-            } else if(EmployeeTypesSelected.ID == 0 && MilitaryPersonTypesSelected.ID == 2)
+            }
+            else if(EmployeeTypesSelected.ID == 0 && MilitaryPersonTypesSelected.ID == 2)
             {
                 return false;
             }
@@ -195,12 +240,26 @@ namespace Military.ViewModels
             
         }
 
+        public ICommand NewExaminationWindow { get { return new RelayCommand(startExamWindow, canStartExam); } }
+
+        private void startExamWindow(object param)
+        {
+            NewExaminationWindow cew = new NewExaminationWindow();
+            cew.Show();
+        }
+
+        private bool canStartExam(object param)
+        {
+            return true;
+        }
+
         private ObservableCollection<Employee> populateEmployeeList()
         {
             var employees = new ObservableCollection<Employee>();
             foreach (var item in mc.Employees)
             {
-                employees.Add(item);
+                if(!item.IsDeleted)
+                    employees.Add(item);
             }
 
             return employees;
@@ -216,14 +275,14 @@ namespace Military.ViewModels
 
                 if (MilitaryPersonTypesSelected.TypeName != "All")
                 {
-                    var militaryPersonnel = mc.MilitaryPersons.Where(x => (int)x.Type == MilitaryPersonTypesSelected.ID).ToList();
+                    var militaryPersonnel = mc.MilitaryPersons.Where(x => (int)x.Type == MilitaryPersonTypesSelected.ID && !x.IsDeleted).ToList();
                     foreach(var item in militaryPersonnel)
                     {
                         employees.Add(item);
                     }
                 } else
                 {
-                    filteredList = mc.Employees.Where(x => (int)x.EmployeeType == employeeTypesSelected.ID).ToList();
+                    filteredList = mc.Employees.Where(x => (int)x.EmployeeType == employeeTypesSelected.ID && !x.IsDeleted).ToList();
 
                     foreach (var item in filteredList)
                     {
@@ -235,7 +294,7 @@ namespace Military.ViewModels
             else
             {
 
-                filteredList = mc.Employees.Where(x => (int)x.EmployeeType == employeeTypesSelected.ID).ToList();
+                filteredList = mc.Employees.Where(x => (int)x.EmployeeType == employeeTypesSelected.ID && !x.IsDeleted).ToList();
 
                 foreach (var item in filteredList)
                 {
@@ -284,7 +343,22 @@ namespace Military.ViewModels
 
         private void employeeDetailsWindow(object param)
         {
-            EmployeeDetailsWindow edw = new EmployeeDetailsWindow();
+            EmployeeDetailsWindow edw;
+            if (EmployeesSourceSelected.EmployeeType == EEmployeeType.SupportStaff)
+            {
+                edw = new EmployeeDetailsWindow(EmployeesSourceSelected);
+            } 
+            else
+            {
+                var employee = mc.MilitaryPersons.FirstOrDefault(x => x.JMBG == EmployeesSourceSelected.JMBG);
+                if(employee.Type == MilitaryPersonType.Soldier)
+                {
+                    edw = new EmployeeDetailsWindow(EmployeesSourceSelected, employee.Type.ToString());
+                } else
+                {
+                    edw = new EmployeeDetailsWindow(EmployeesSourceSelected, employee.Type.ToString());
+                }
+            }
             edw.Show();
         }
 
@@ -305,6 +379,20 @@ namespace Military.ViewModels
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        public ICommand EmployeeDelete { get { return new RelayCommand(deleteEmployee, canDeleteEmployee); } }
+
+        private void deleteEmployee(object param)
+        {
+            mc.Employees.FirstOrDefault(x => x.JMBG == EmployeesSourceSelected.JMBG).IsDeleted = true;
+            mc.SaveChanges();
+            employeesSource = filterEmployees();
+        }
+
+        private bool canDeleteEmployee(object param)
+        {
+            return true;
         }
         #endregion
     }

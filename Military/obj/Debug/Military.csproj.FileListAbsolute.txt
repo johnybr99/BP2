@@ -48,3 +48,5 @@ C:\Users\Nikola\Documents\Military\Military\obj\Debug\Military.csproj.CoreCompil
 C:\Users\Nikola\Documents\Military\Military\obj\Debug\Military.csproj.CopyComplete
 C:\Users\Nikola\Documents\Military\Military\obj\Debug\Military.exe
 C:\Users\Nikola\Documents\Military\Military\obj\Debug\Military.pdb
+C:\Users\Nikola\Documents\Military\Military\obj\Debug\Views\NewExaminationWindow.g.cs
+C:\Users\Nikola\Documents\Military\Military\obj\Debug\Views\NewExaminationWindow.baml

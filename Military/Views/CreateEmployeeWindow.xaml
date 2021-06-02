@@ -10,7 +10,12 @@
         WindowStartupLocation="CenterScreen">
     <DockPanel>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button MinHeight="30" MaxHeight="30" MinWidth="220" Margin="20">Create</Button>
+            <Button
+                MinHeight="30" MaxHeight="30" MinWidth="220" Margin="20"
+                Command="{Binding CreateEmployeeCommand}">
+                Create
+            
+            </Button>
         </StackPanel>
         <Grid Margin="20" DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
@@ -78,8 +83,8 @@
             <ComboBox
                                 Grid.Column="1"
                                 Grid.Row="6"
-                                ItemsSource="{Binding SoldierRank}"
-                                SelectedItem="{Binding SoldierRankSelected, Mode=TwoWay}"
+                                ItemsSource="{Binding SoldierRanks}"
+                                SelectedItem="{Binding SoldierRanksSelected, Mode=TwoWay}"
                                 DisplayMemberPath="Name" Height="25" Margin="30,0,0,0" VerticalAlignment="Top"
                                 Visibility="{Binding SoldierFieldsVisible}">
             </ComboBox>

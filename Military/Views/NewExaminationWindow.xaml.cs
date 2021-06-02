@@ -1,5 +1,4 @@
-﻿using Military.Models;
-using Military.ViewModels;
+﻿using Military.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,24 +16,19 @@ using System.Windows.Shapes;
 namespace Military.Views
 {
     /// <summary>
-    /// Interaction logic for CreateEmployeeWindow.xaml
+    /// Interaction logic for NewExaminationWindow.xaml
     /// </summary>
-    public partial class CreateEmployeeWindow : Window
+    public partial class NewExaminationWindow : Window
     {
-        public CreateEmployeeWindow()
+        public NewExaminationWindow()
         {
             InitializeComponent();
-            this.Loaded += (s, e) => { this.DataContext = new CreateEmployeeViewModel(); };
-        }
-
-        public CreateEmployeeWindow(EmployeeTypeModel type, MilitaryPersonTypeModel militaryType)
-        {
-            InitializeComponent();
-            var vm = new CreateEmployeeViewModel(type, militaryType);
+            var vm = new CreateExaminationViewModel();
             this.Loaded += (s, e) => { this.DataContext = vm; };
             if (vm.CloseAction == null)
                 vm.CloseAction = new Action(this.Close);
-
         }
+
+
     }
 }
