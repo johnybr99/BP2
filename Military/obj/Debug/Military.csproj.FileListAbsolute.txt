@@ -1,0 +1,50 @@
+C:\Users\nikol\Documents\My Stuff\4. godina\Baze podataka 2\Military\Military\bin\Debug\Military.exe.config
+C:\Users\nikol\Documents\My Stuff\4. godina\Baze podataka 2\Military\Military\bin\Debug\Military.exe
+C:\Users\nikol\Documents\My Stuff\4. godina\Baze podataka 2\Military\Military\bin\Debug\Military.pdb
+C:\Users\nikol\Documents\My Stuff\4. godina\Baze podataka 2\Military\Military\bin\Debug\EntityFramework.dll
+C:\Users\nikol\Documents\My Stuff\4. godina\Baze podataka 2\Military\Military\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\nikol\Documents\My Stuff\4. godina\Baze podataka 2\Military\Military\bin\Debug\EntityFramework.xml
+C:\Users\nikol\Documents\My Stuff\4. godina\Baze podataka 2\Military\Military\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\nikol\Documents\My Stuff\4. godina\Baze podataka 2\Military\Military\obj\Debug\Military.csproj.AssemblyReference.cache
+C:\Users\nikol\Documents\My Stuff\4. godina\Baze podataka 2\Military\Military\obj\Debug\Views\CreateEmployeeWindow.g.cs
+C:\Users\nikol\Documents\My Stuff\4. godina\Baze podataka 2\Military\Military\obj\Debug\Views\EmployeeDetailsWindow.g.cs
+C:\Users\nikol\Documents\My Stuff\4. godina\Baze podataka 2\Military\Military\obj\Debug\Views\MainWindow.g.cs
+C:\Users\nikol\Documents\My Stuff\4. godina\Baze podataka 2\Military\Military\obj\Debug\App.g.cs
+C:\Users\nikol\Documents\My Stuff\4. godina\Baze podataka 2\Military\Military\obj\Debug\Military_Content.g.cs
+C:\Users\nikol\Documents\My Stuff\4. godina\Baze podataka 2\Military\Military\obj\Debug\Military_MarkupCompile.cache
+C:\Users\nikol\Documents\My Stuff\4. godina\Baze podataka 2\Military\Military\obj\Debug\Military_MarkupCompile.lref
+C:\Users\nikol\Documents\My Stuff\4. godina\Baze podataka 2\Military\Military\obj\Debug\Views\CreateEmployeeWindow.baml
+C:\Users\nikol\Documents\My Stuff\4. godina\Baze podataka 2\Military\Military\obj\Debug\Views\EmployeeDetailsWindow.baml
+C:\Users\nikol\Documents\My Stuff\4. godina\Baze podataka 2\Military\Military\obj\Debug\Views\MainWindow.baml
+C:\Users\nikol\Documents\My Stuff\4. godina\Baze podataka 2\Military\Military\obj\Debug\Military.g.resources
+C:\Users\nikol\Documents\My Stuff\4. godina\Baze podataka 2\Military\Military\obj\Debug\Military.Properties.Resources.resources
+C:\Users\nikol\Documents\My Stuff\4. godina\Baze podataka 2\Military\Military\obj\Debug\Military.csproj.GenerateResource.cache
+C:\Users\nikol\Documents\My Stuff\4. godina\Baze podataka 2\Military\Military\obj\Debug\Military.csproj.CoreCompileInputs.cache
+C:\Users\nikol\Documents\My Stuff\4. godina\Baze podataka 2\Military\Military\obj\Debug\Military.csproj.CopyComplete
+C:\Users\nikol\Documents\My Stuff\4. godina\Baze podataka 2\Military\Military\obj\Debug\Military.exe
+C:\Users\nikol\Documents\My Stuff\4. godina\Baze podataka 2\Military\Military\obj\Debug\Military.pdb
+C:\Users\Nikola\Documents\Military\Military\obj\Debug\Views\CreateEmployeeWindow.g.cs
+C:\Users\Nikola\Documents\Military\Military\obj\Debug\Views\EmployeeDetailsWindow.g.cs
+C:\Users\Nikola\Documents\Military\Military\obj\Debug\Views\MainWindow.g.cs
+C:\Users\Nikola\Documents\Military\Military\obj\Debug\App.g.cs
+C:\Users\Nikola\Documents\Military\Military\obj\Debug\Military_Content.g.cs
+C:\Users\Nikola\Documents\Military\Military\obj\Debug\Military_MarkupCompile.cache
+C:\Users\Nikola\Documents\Military\Military\obj\Debug\Military_MarkupCompile.lref
+C:\Users\Nikola\Documents\Military\Military\bin\Debug\Military.exe.config
+C:\Users\Nikola\Documents\Military\Military\bin\Debug\Military.exe
+C:\Users\Nikola\Documents\Military\Military\bin\Debug\Military.pdb
+C:\Users\Nikola\Documents\Military\Military\bin\Debug\EntityFramework.dll
+C:\Users\Nikola\Documents\Military\Military\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Nikola\Documents\Military\Military\bin\Debug\EntityFramework.xml
+C:\Users\Nikola\Documents\Military\Military\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Nikola\Documents\Military\Military\obj\Debug\Military.csprojAssemblyReference.cache
+C:\Users\Nikola\Documents\Military\Military\obj\Debug\Views\CreateEmployeeWindow.baml
+C:\Users\Nikola\Documents\Military\Military\obj\Debug\Views\EmployeeDetailsWindow.baml
+C:\Users\Nikola\Documents\Military\Military\obj\Debug\Views\MainWindow.baml
+C:\Users\Nikola\Documents\Military\Military\obj\Debug\Military.g.resources
+C:\Users\Nikola\Documents\Military\Military\obj\Debug\Military.Properties.Resources.resources
+C:\Users\Nikola\Documents\Military\Military\obj\Debug\Military.csproj.GenerateResource.cache
+C:\Users\Nikola\Documents\Military\Military\obj\Debug\Military.csproj.CoreCompileInputs.cache
+C:\Users\Nikola\Documents\Military\Military\obj\Debug\Military.csproj.CopyComplete
+C:\Users\Nikola\Documents\Military\Military\obj\Debug\Military.exe
+C:\Users\Nikola\Documents\Military\Military\obj\Debug\Military.pdb

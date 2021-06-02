@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EmployeeStoreContainer" CdmEntityContainer="MilitaryContainer">
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="IsTypeOf(Employee.Employee)">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Employee.MilitaryPerson)">
+        <MappingFragment StoreEntitySet="Employees_MilitaryPerson">
+          <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CampId" ColumnName="CampId" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Employee.Soldier)">
+        <MappingFragment StoreEntitySet="Employees_Soldier">
+          <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+          <ScalarProperty Name="RankId" ColumnName="RankId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Employee.Medic)">
+        <MappingFragment StoreEntitySet="Employees_Medic">
+          <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+          <ScalarProperty Name="LicenseNo" ColumnName="LicenseNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Employee.SupportPerson)">
+        <MappingFragment StoreEntitySet="Employees_SupportPerson">
+          <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Specialties">
+      <EntityTypeMapping TypeName="IsTypeOf(Employee.Specialty)">
+        <MappingFragment StoreEntitySet="Specialties">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Camps">
+      <EntityTypeMapping TypeName="IsTypeOf(Employee.Camp)">
+        <MappingFragment StoreEntitySet="Camps">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Units">
+      <EntityTypeMapping TypeName="IsTypeOf(Employee.Unit)">
+        <MappingFragment StoreEntitySet="Units">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Examinations">
+      <EntityTypeMapping TypeName="IsTypeOf(Employee.Examination)">
+        <MappingFragment StoreEntitySet="Examinations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ranks">
+      <EntityTypeMapping TypeName="IsTypeOf(Employee.Rank)">
+        <MappingFragment StoreEntitySet="Ranks">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Equipments">
+      <EntityTypeMapping TypeName="IsTypeOf(Employee.Equipment)">
+        <MappingFragment StoreEntitySet="Equipments">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CampId" ColumnName="CampId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="MedicSpecialty" TypeName="Employee.MedicSpecialty" StoreEntitySet="Employees_Medic">
+      <EndProperty Name="Specialty">
+        <ScalarProperty Name="Id" ColumnName="Specialty_Id" />
+      </EndProperty>
+      <EndProperty Name="Medic">
+        <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+      </EndProperty>
+      <Condition ColumnName="Specialty_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SoldierExamination" TypeName="Employee.SoldierExamination" StoreEntitySet="Examinations">
+      <EndProperty Name="Soldier">
+        <ScalarProperty Name="JMBG" ColumnName="Soldier_JMBG" />
+      </EndProperty>
+      <EndProperty Name="Examination">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ExaminationMedic" TypeName="Employee.ExaminationMedic" StoreEntitySet="Examinations">
+      <EndProperty Name="Medic">
+        <ScalarProperty Name="JMBG" ColumnName="Medic_JMBG" />
+      </EndProperty>
+      <EndProperty Name="Examination">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ExaminationCamp" TypeName="Employee.ExaminationCamp" StoreEntitySet="Examinations">
+      <EndProperty Name="Camp">
+        <ScalarProperty Name="Id" ColumnName="Camp_Id" />
+      </EndProperty>
+      <EndProperty Name="Examination">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

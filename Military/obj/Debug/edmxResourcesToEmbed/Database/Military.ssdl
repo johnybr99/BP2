@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Employee.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="EmployeeStoreContainer">
+    <EntitySet Name="Employees" EntityType="Employee.Store.Employees" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Specialties" EntityType="Employee.Store.Specialties" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Camps" EntityType="Employee.Store.Camps" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Units" EntityType="Employee.Store.Units" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Examinations" EntityType="Employee.Store.Examinations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Ranks" EntityType="Employee.Store.Ranks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Equipments" EntityType="Employee.Store.Equipments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Employees_MilitaryPerson" EntityType="Employee.Store.Employees_MilitaryPerson" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Employees_Soldier" EntityType="Employee.Store.Employees_Soldier" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Employees_Medic" EntityType="Employee.Store.Employees_Medic" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Employees_SupportPerson" EntityType="Employee.Store.Employees_SupportPerson" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="SoldierRank" Association="Employee.Store.SoldierRank">
+      <End Role="Soldier" EntitySet="Employees_Soldier" />
+      <End Role="Rank" EntitySet="Ranks" />
+    </AssociationSet>
+    <AssociationSet Name="MedicSpecialty" Association="Employee.Store.MedicSpecialty">
+      <End Role="Medic" EntitySet="Employees_Medic" />
+      <End Role="Specialty" EntitySet="Specialties" />
+    </AssociationSet>
+    <AssociationSet Name="EquipmentCamp" Association="Employee.Store.EquipmentCamp">
+      <End Role="Equipment" EntitySet="Equipments" />
+      <End Role="Camp" EntitySet="Camps" />
+    </AssociationSet>
+    <AssociationSet Name="MilitaryPersonCamp" Association="Employee.Store.MilitaryPersonCamp">
+      <End Role="MilitaryPerson" EntitySet="Employees_MilitaryPerson" />
+      <End Role="Camp" EntitySet="Camps" />
+    </AssociationSet>
+    <AssociationSet Name="SoldierExamination" Association="Employee.Store.SoldierExamination">
+      <End Role="Soldier" EntitySet="Employees_Soldier" />
+      <End Role="Examination" EntitySet="Examinations" />
+    </AssociationSet>
+    <AssociationSet Name="ExaminationMedic" Association="Employee.Store.ExaminationMedic">
+      <End Role="Examination" EntitySet="Examinations" />
+      <End Role="Medic" EntitySet="Employees_Medic" />
+    </AssociationSet>
+    <AssociationSet Name="ExaminationCamp" Association="Employee.Store.ExaminationCamp">
+      <End Role="Examination" EntitySet="Examinations" />
+      <End Role="Camp" EntitySet="Camps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MilitaryPerson_inherits_Employee" Association="Employee.Store.FK_MilitaryPerson_inherits_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="MilitaryPerson" EntitySet="Employees_MilitaryPerson" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Soldier_inherits_MilitaryPerson" Association="Employee.Store.FK_Soldier_inherits_MilitaryPerson">
+      <End Role="MilitaryPerson" EntitySet="Employees_MilitaryPerson" />
+      <End Role="Soldier" EntitySet="Employees_Soldier" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Medic_inherits_MilitaryPerson" Association="Employee.Store.FK_Medic_inherits_MilitaryPerson">
+      <End Role="MilitaryPerson" EntitySet="Employees_MilitaryPerson" />
+      <End Role="Medic" EntitySet="Employees_Medic" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupportPerson_inherits_Employee" Association="Employee.Store.FK_SupportPerson_inherits_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="SupportPerson" EntitySet="Employees_SupportPerson" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="JMBG" />
+    </Key>
+    <Property Name="JMBG" Type="nchar" Nullable="false" MaxLength="450" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EmployeeType" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Specialties">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Camps">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Units">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Examinations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="datetime" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Soldier_JMBG" Type="nchar" MaxLength="450" Nullable="false" />
+    <Property Name="Medic_JMBG" Type="nchar" MaxLength="450" Nullable="false" />
+    <Property Name="Camp_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ranks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Equipments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CampId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employees_MilitaryPerson">
+    <Key>
+      <PropertyRef Name="JMBG" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CampId" Type="int" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="JMBG" Type="nchar" Nullable="false" MaxLength="450" />
+  </EntityType>
+  <EntityType Name="Employees_Soldier">
+    <Key>
+      <PropertyRef Name="JMBG" />
+    </Key>
+    <Property Name="RankId" Type="int" Nullable="false" />
+    <Property Name="JMBG" Type="nchar" Nullable="false" MaxLength="450" />
+  </EntityType>
+  <EntityType Name="Employees_Medic">
+    <Key>
+      <PropertyRef Name="JMBG" />
+    </Key>
+    <Property Name="LicenseNo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="JMBG" Type="nchar" Nullable="false" MaxLength="450" />
+    <Property Name="Specialty_Id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Employees_SupportPerson">
+    <Key>
+      <PropertyRef Name="JMBG" />
+    </Key>
+    <Property Name="JMBG" Type="nchar" Nullable="false" MaxLength="450" />
+  </EntityType>
+  <Association Name="SoldierRank">
+    <End Role="Soldier" Type="Employee.Store.Employees_Soldier" Multiplicity="*" />
+    <End Role="Rank" Type="Employee.Store.Ranks" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Rank">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Soldier">
+        <PropertyRef Name="RankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MedicSpecialty">
+    <End Role="Medic" Type="Employee.Store.Employees_Medic" Multiplicity="*" />
+    <End Role="Specialty" Type="Employee.Store.Specialties" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Specialty">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Medic">
+        <PropertyRef Name="Specialty_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EquipmentCamp">
+    <End Role="Equipment" Type="Employee.Store.Equipments" Multiplicity="*" />
+    <End Role="Camp" Type="Employee.Store.Camps" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Camp">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Equipment">
+        <PropertyRef Name="CampId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MilitaryPersonCamp">
+    <End Role="MilitaryPerson" Type="Employee.Store.Employees_MilitaryPerson" Multiplicity="*" />
+    <End Role="Camp" Type="Employee.Store.Camps" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Camp">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MilitaryPerson">
+        <PropertyRef Name="CampId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SoldierExamination">
+    <End Role="Soldier" Type="Employee.Store.Employees_Soldier" Multiplicity="1" />
+    <End Role="Examination" Type="Employee.Store.Examinations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Soldier">
+        <PropertyRef Name="JMBG" />
+      </Principal>
+      <Dependent Role="Examination">
+        <PropertyRef Name="Soldier_JMBG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ExaminationMedic">
+    <End Role="Examination" Type="Employee.Store.Examinations" Multiplicity="*" />
+    <End Role="Medic" Type="Employee.Store.Employees_Medic" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Medic">
+        <PropertyRef Name="JMBG" />
+      </Principal>
+      <Dependent Role="Examination">
+        <PropertyRef Name="Medic_JMBG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ExaminationCamp">
+    <End Role="Examination" Type="Employee.Store.Examinations" Multiplicity="*" />
+    <End Role="Camp" Type="Employee.Store.Camps" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Camp">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Examination">
+        <PropertyRef Name="Camp_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MilitaryPerson_inherits_Employee">
+    <End Role="Employee" Type="Employee.Store.Employees" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="MilitaryPerson" Type="Employee.Store.Employees_MilitaryPerson" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="JMBG" />
+      </Principal>
+      <Dependent Role="MilitaryPerson">
+        <PropertyRef Name="JMBG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Soldier_inherits_MilitaryPerson">
+    <End Role="MilitaryPerson" Type="Employee.Store.Employees_MilitaryPerson" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Soldier" Type="Employee.Store.Employees_Soldier" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="MilitaryPerson">
+        <PropertyRef Name="JMBG" />
+      </Principal>
+      <Dependent Role="Soldier">
+        <PropertyRef Name="JMBG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Medic_inherits_MilitaryPerson">
+    <End Role="MilitaryPerson" Type="Employee.Store.Employees_MilitaryPerson" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Medic" Type="Employee.Store.Employees_Medic" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="MilitaryPerson">
+        <PropertyRef Name="JMBG" />
+      </Principal>
+      <Dependent Role="Medic">
+        <PropertyRef Name="JMBG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupportPerson_inherits_Employee">
+    <End Role="Employee" Type="Employee.Store.Employees" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SupportPerson" Type="Employee.Store.Employees_SupportPerson" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="JMBG" />
+      </Principal>
+      <Dependent Role="SupportPerson">
+        <PropertyRef Name="JMBG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

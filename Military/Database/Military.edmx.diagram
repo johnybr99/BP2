@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="567003559c7e430db7a0c6d8baf6581d" Name="Diagram1" >
+        <EntityTypeShape EntityType="Employee.Employee" Width="1.5" PointX="8.5" PointY="0.75" />
+        <EntityTypeShape EntityType="Employee.MilitaryPerson" Width="1.5" PointX="0.625" PointY="0.5" IsExpanded="true" />
+        <InheritanceConnector EntityType="Employee.MilitaryPerson" />
+        <EntityTypeShape EntityType="Employee.Medic" Width="1.5" PointX="3.125" PointY="0.625" />
+        <InheritanceConnector EntityType="Employee.Medic" />
+        <EntityTypeShape EntityType="Employee.Soldier" Width="1.5" PointX="6.625" PointY="5.375" />
+        <InheritanceConnector EntityType="Employee.Soldier" />
+        <EntityTypeShape EntityType="Employee.Specialty" Width="1.5" PointX="5.875" PointY="0.5" />
+        <EntityTypeShape EntityType="Employee.Camp" Width="1.5" PointX="0.5" PointY="2.875" />
+        <EntityTypeShape EntityType="Employee.Unit" Width="1.5" PointX="2.75" PointY="3" />
+        <EntityTypeShape EntityType="Employee.SupportPerson" Width="1.5" PointX="4.625" PointY="3.25" />
+        <InheritanceConnector EntityType="Employee.SupportPerson" />
+        <EntityTypeShape EntityType="Employee.Examination" Width="1.5" PointX="2.625" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Employee.Rank" Width="1.5" PointX="2.875" PointY="4.875" />
+        <AssociationConnector Association="Employee.SoldierRank" />
+        <AssociationConnector Association="Employee.MedicSpecialty" />
+        <EntityTypeShape EntityType="Employee.Equipment" Width="1.5" PointX="0.75" PointY="5.25" />
+        <AssociationConnector Association="Employee.EquipmentCamp" />
+        <AssociationConnector Association="Employee.MilitaryPersonCamp" />
+        <AssociationConnector Association="Employee.SoldierExamination" />
+        <AssociationConnector Association="Employee.ExaminationMedic" />
+        <AssociationConnector Association="Employee.ExaminationCamp" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

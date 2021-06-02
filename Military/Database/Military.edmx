@@ -1,0 +1,615 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Employee.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="EmployeeStoreContainer">
+    <EntitySet Name="Employees" EntityType="Employee.Store.Employees" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Specialties" EntityType="Employee.Store.Specialties" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Camps" EntityType="Employee.Store.Camps" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Units" EntityType="Employee.Store.Units" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Examinations" EntityType="Employee.Store.Examinations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Ranks" EntityType="Employee.Store.Ranks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Equipments" EntityType="Employee.Store.Equipments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Employees_MilitaryPerson" EntityType="Employee.Store.Employees_MilitaryPerson" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Employees_Soldier" EntityType="Employee.Store.Employees_Soldier" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Employees_Medic" EntityType="Employee.Store.Employees_Medic" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Employees_SupportPerson" EntityType="Employee.Store.Employees_SupportPerson" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="SoldierRank" Association="Employee.Store.SoldierRank">
+      <End Role="Soldier" EntitySet="Employees_Soldier" />
+      <End Role="Rank" EntitySet="Ranks" />
+    </AssociationSet>
+    <AssociationSet Name="MedicSpecialty" Association="Employee.Store.MedicSpecialty">
+      <End Role="Medic" EntitySet="Employees_Medic" />
+      <End Role="Specialty" EntitySet="Specialties" />
+    </AssociationSet>
+    <AssociationSet Name="EquipmentCamp" Association="Employee.Store.EquipmentCamp">
+      <End Role="Equipment" EntitySet="Equipments" />
+      <End Role="Camp" EntitySet="Camps" />
+    </AssociationSet>
+    <AssociationSet Name="MilitaryPersonCamp" Association="Employee.Store.MilitaryPersonCamp">
+      <End Role="MilitaryPerson" EntitySet="Employees_MilitaryPerson" />
+      <End Role="Camp" EntitySet="Camps" />
+    </AssociationSet>
+    <AssociationSet Name="SoldierExamination" Association="Employee.Store.SoldierExamination">
+      <End Role="Soldier" EntitySet="Employees_Soldier" />
+      <End Role="Examination" EntitySet="Examinations" />
+    </AssociationSet>
+    <AssociationSet Name="ExaminationMedic" Association="Employee.Store.ExaminationMedic">
+      <End Role="Examination" EntitySet="Examinations" />
+      <End Role="Medic" EntitySet="Employees_Medic" />
+    </AssociationSet>
+    <AssociationSet Name="ExaminationCamp" Association="Employee.Store.ExaminationCamp">
+      <End Role="Examination" EntitySet="Examinations" />
+      <End Role="Camp" EntitySet="Camps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MilitaryPerson_inherits_Employee" Association="Employee.Store.FK_MilitaryPerson_inherits_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="MilitaryPerson" EntitySet="Employees_MilitaryPerson" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Soldier_inherits_MilitaryPerson" Association="Employee.Store.FK_Soldier_inherits_MilitaryPerson">
+      <End Role="MilitaryPerson" EntitySet="Employees_MilitaryPerson" />
+      <End Role="Soldier" EntitySet="Employees_Soldier" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Medic_inherits_MilitaryPerson" Association="Employee.Store.FK_Medic_inherits_MilitaryPerson">
+      <End Role="MilitaryPerson" EntitySet="Employees_MilitaryPerson" />
+      <End Role="Medic" EntitySet="Employees_Medic" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupportPerson_inherits_Employee" Association="Employee.Store.FK_SupportPerson_inherits_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="SupportPerson" EntitySet="Employees_SupportPerson" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="JMBG" />
+    </Key>
+    <Property Name="JMBG" Type="nchar" Nullable="false" MaxLength="450" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EmployeeType" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Specialties">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Camps">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Units">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Examinations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="datetime" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Soldier_JMBG" Type="nchar" MaxLength="450" Nullable="false" />
+    <Property Name="Medic_JMBG" Type="nchar" MaxLength="450" Nullable="false" />
+    <Property Name="Camp_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ranks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Equipments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CampId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employees_MilitaryPerson">
+    <Key>
+      <PropertyRef Name="JMBG" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CampId" Type="int" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="JMBG" Type="nchar" Nullable="false" MaxLength="450" />
+  </EntityType>
+  <EntityType Name="Employees_Soldier">
+    <Key>
+      <PropertyRef Name="JMBG" />
+    </Key>
+    <Property Name="RankId" Type="int" Nullable="false" />
+    <Property Name="JMBG" Type="nchar" Nullable="false" MaxLength="450" />
+  </EntityType>
+  <EntityType Name="Employees_Medic">
+    <Key>
+      <PropertyRef Name="JMBG" />
+    </Key>
+    <Property Name="LicenseNo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="JMBG" Type="nchar" Nullable="false" MaxLength="450" />
+    <Property Name="Specialty_Id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Employees_SupportPerson">
+    <Key>
+      <PropertyRef Name="JMBG" />
+    </Key>
+    <Property Name="JMBG" Type="nchar" Nullable="false" MaxLength="450" />
+  </EntityType>
+  <Association Name="SoldierRank">
+    <End Role="Soldier" Type="Employee.Store.Employees_Soldier" Multiplicity="*" />
+    <End Role="Rank" Type="Employee.Store.Ranks" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Rank">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Soldier">
+        <PropertyRef Name="RankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MedicSpecialty">
+    <End Role="Medic" Type="Employee.Store.Employees_Medic" Multiplicity="*" />
+    <End Role="Specialty" Type="Employee.Store.Specialties" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Specialty">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Medic">
+        <PropertyRef Name="Specialty_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EquipmentCamp">
+    <End Role="Equipment" Type="Employee.Store.Equipments" Multiplicity="*" />
+    <End Role="Camp" Type="Employee.Store.Camps" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Camp">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Equipment">
+        <PropertyRef Name="CampId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MilitaryPersonCamp">
+    <End Role="MilitaryPerson" Type="Employee.Store.Employees_MilitaryPerson" Multiplicity="*" />
+    <End Role="Camp" Type="Employee.Store.Camps" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Camp">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MilitaryPerson">
+        <PropertyRef Name="CampId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SoldierExamination">
+    <End Role="Soldier" Type="Employee.Store.Employees_Soldier" Multiplicity="1" />
+    <End Role="Examination" Type="Employee.Store.Examinations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Soldier">
+        <PropertyRef Name="JMBG" />
+      </Principal>
+      <Dependent Role="Examination">
+        <PropertyRef Name="Soldier_JMBG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ExaminationMedic">
+    <End Role="Examination" Type="Employee.Store.Examinations" Multiplicity="*" />
+    <End Role="Medic" Type="Employee.Store.Employees_Medic" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Medic">
+        <PropertyRef Name="JMBG" />
+      </Principal>
+      <Dependent Role="Examination">
+        <PropertyRef Name="Medic_JMBG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ExaminationCamp">
+    <End Role="Examination" Type="Employee.Store.Examinations" Multiplicity="*" />
+    <End Role="Camp" Type="Employee.Store.Camps" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Camp">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Examination">
+        <PropertyRef Name="Camp_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MilitaryPerson_inherits_Employee">
+    <End Role="Employee" Type="Employee.Store.Employees" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="MilitaryPerson" Type="Employee.Store.Employees_MilitaryPerson" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="JMBG" />
+      </Principal>
+      <Dependent Role="MilitaryPerson">
+        <PropertyRef Name="JMBG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Soldier_inherits_MilitaryPerson">
+    <End Role="MilitaryPerson" Type="Employee.Store.Employees_MilitaryPerson" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Soldier" Type="Employee.Store.Employees_Soldier" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="MilitaryPerson">
+        <PropertyRef Name="JMBG" />
+      </Principal>
+      <Dependent Role="Soldier">
+        <PropertyRef Name="JMBG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Medic_inherits_MilitaryPerson">
+    <End Role="MilitaryPerson" Type="Employee.Store.Employees_MilitaryPerson" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Medic" Type="Employee.Store.Employees_Medic" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="MilitaryPerson">
+        <PropertyRef Name="JMBG" />
+      </Principal>
+      <Dependent Role="Medic">
+        <PropertyRef Name="JMBG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupportPerson_inherits_Employee">
+    <End Role="Employee" Type="Employee.Store.Employees" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SupportPerson" Type="Employee.Store.Employees_SupportPerson" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="JMBG" />
+      </Principal>
+      <Dependent Role="SupportPerson">
+        <PropertyRef Name="JMBG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Employee" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="MilitaryContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employees" EntityType="Employee.Employee" />
+          <EntitySet Name="Specialties" EntityType="Employee.Specialty" />
+          <EntitySet Name="Camps" EntityType="Employee.Camp" />
+          <EntitySet Name="Units" EntityType="Employee.Unit" />
+          <EntitySet Name="Examinations" EntityType="Employee.Examination" />
+          <EntitySet Name="Ranks" EntityType="Employee.Rank" />
+          <AssociationSet Name="SoldierRank" Association="Employee.SoldierRank">
+            <End Role="Soldier" EntitySet="Employees" />
+            <End Role="Rank" EntitySet="Ranks" />
+          </AssociationSet>
+          <AssociationSet Name="MedicSpecialty" Association="Employee.MedicSpecialty">
+            <End Role="Medic" EntitySet="Employees" />
+            <End Role="Specialty" EntitySet="Specialties" />
+          </AssociationSet>
+          <EntitySet Name="Equipments" EntityType="Employee.Equipment" />
+          <AssociationSet Name="EquipmentCamp" Association="Employee.EquipmentCamp">
+            <End Role="Equipment" EntitySet="Equipments" />
+            <End Role="Camp" EntitySet="Camps" />
+          </AssociationSet>
+          <AssociationSet Name="MilitaryPersonCamp" Association="Employee.MilitaryPersonCamp">
+            <End Role="MilitaryPerson" EntitySet="Employees" />
+            <End Role="Camp" EntitySet="Camps" />
+          </AssociationSet>
+          <AssociationSet Name="SoldierExamination" Association="Employee.SoldierExamination">
+            <End Role="Soldier" EntitySet="Employees" />
+            <End Role="Examination" EntitySet="Examinations" />
+          </AssociationSet>
+          <AssociationSet Name="ExaminationMedic" Association="Employee.ExaminationMedic">
+            <End Role="Examination" EntitySet="Examinations" />
+            <End Role="Medic" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="ExaminationCamp" Association="Employee.ExaminationCamp">
+            <End Role="Examination" EntitySet="Examinations" />
+            <End Role="Camp" EntitySet="Camps" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Employee" Abstract="true">
+          <Key>
+            <PropertyRef Name="JMBG" />
+          </Key>
+          <Property Name="JMBG" Type="String" Nullable="false" cg:SetterAccess="Public" FixedLength="true" ConcurrencyMode="Fixed" MaxLength="450" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Surname" Type="String" Nullable="false" />
+          <Property Name="EmployeeType" Type="Employee.EEmployeeType" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MilitaryPerson" BaseType="Employee.Employee">
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Camp" Relationship="Employee.MilitaryPersonCamp" FromRole="MilitaryPerson" ToRole="Camp" />
+          <Property Name="CampId" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="Employee.MilitaryPersonType" Nullable="false" />
+        </EntityType>
+        <EnumType Name="EEmployeeType">
+          <Member Name="MilitaryStaff" />
+          <Member Name="SupportStaff" />
+        </EnumType>
+        <EntityType Name="Medic" BaseType="Employee.MilitaryPerson" >
+          <Property Name="LicenseNo" Type="String" Nullable="false" />
+          <NavigationProperty Name="Specialty" Relationship="Employee.MedicSpecialty" FromRole="Medic" ToRole="Specialty" />
+          <NavigationProperty Name="Examinations" Relationship="Employee.ExaminationMedic" FromRole="Medic" ToRole="Examination" />
+        </EntityType>
+        <EntityType Name="Soldier" BaseType="Employee.MilitaryPerson" >
+          <NavigationProperty Name="Rank" Relationship="Employee.SoldierRank" FromRole="Soldier" ToRole="Rank" />
+          <Property Name="RankId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Examinations" Relationship="Employee.SoldierExamination" FromRole="Soldier" ToRole="Examination" />
+        </EntityType>
+        <EntityType Name="Specialty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Medics" Relationship="Employee.MedicSpecialty" FromRole="Specialty" ToRole="Medic" />
+        </EntityType>
+        <EntityType Name="Camp">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Equipments" Relationship="Employee.EquipmentCamp" FromRole="Camp" ToRole="Equipment" />
+          <NavigationProperty Name="MilitaryPersons" Relationship="Employee.MilitaryPersonCamp" FromRole="Camp" ToRole="MilitaryPerson" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Examinations" Relationship="Employee.ExaminationCamp" FromRole="Camp" ToRole="Examination" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupportPerson" BaseType="Employee.Employee" />
+        <EntityType Name="Examination">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Soldier" Relationship="Employee.SoldierExamination" FromRole="Examination" ToRole="Soldier" />
+          <NavigationProperty Name="Medic" Relationship="Employee.ExaminationMedic" FromRole="Examination" ToRole="Medic" />
+          <NavigationProperty Name="Camp" Relationship="Employee.ExaminationCamp" FromRole="Examination" ToRole="Camp" />
+        </EntityType>
+        <EntityType Name="Rank">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Soldiers" Relationship="Employee.SoldierRank" FromRole="Rank" ToRole="Soldier" />
+        </EntityType>
+        <Association Name="SoldierRank">
+          <End Type="Employee.Soldier" Role="Soldier" Multiplicity="*" />
+          <End Type="Employee.Rank" Role="Rank" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Rank">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Soldier">
+              <PropertyRef Name="RankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MedicSpecialty">
+          <End Type="Employee.Medic" Role="Medic" Multiplicity="*" />
+          <End Type="Employee.Specialty" Role="Specialty" Multiplicity="0..1" />
+        </Association>
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Camp" Relationship="Employee.EquipmentCamp" FromRole="Equipment" ToRole="Camp" />
+          <Property Name="CampId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="EquipmentCamp">
+          <End Type="Employee.Equipment" Role="Equipment" Multiplicity="*" />
+          <End Type="Employee.Camp" Role="Camp" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Camp">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Equipment">
+              <PropertyRef Name="CampId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="ComplexType1" />
+        <Association Name="MilitaryPersonCamp">
+          <End Type="Employee.MilitaryPerson" Role="MilitaryPerson" Multiplicity="*" />
+          <End Type="Employee.Camp" Role="Camp" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Camp">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MilitaryPerson">
+              <PropertyRef Name="CampId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SoldierExamination">
+          <End Type="Employee.Soldier" Role="Soldier" Multiplicity="1" />
+          <End Type="Employee.Examination" Role="Examination" Multiplicity="*" />
+        </Association>
+        <Association Name="ExaminationMedic">
+          <End Type="Employee.Examination" Role="Examination" Multiplicity="*" />
+          <End Type="Employee.Medic" Role="Medic" Multiplicity="1" />
+        </Association>
+        <Association Name="ExaminationCamp">
+          <End Type="Employee.Examination" Role="Examination" Multiplicity="*" />
+          <End Type="Employee.Camp" Role="Camp" Multiplicity="1" />
+        </Association>
+        <EnumType Name="MilitaryPersonType">
+          <Member Name="Soldier" />
+          <Member Name="Medic" />
+        </EnumType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EmployeeStoreContainer" CdmEntityContainer="MilitaryContainer">
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="IsTypeOf(Employee.Employee)">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Employee.MilitaryPerson)">
+        <MappingFragment StoreEntitySet="Employees_MilitaryPerson">
+          <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CampId" ColumnName="CampId" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Employee.Soldier)">
+        <MappingFragment StoreEntitySet="Employees_Soldier">
+          <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+          <ScalarProperty Name="RankId" ColumnName="RankId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Employee.Medic)">
+        <MappingFragment StoreEntitySet="Employees_Medic">
+          <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+          <ScalarProperty Name="LicenseNo" ColumnName="LicenseNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Employee.SupportPerson)">
+        <MappingFragment StoreEntitySet="Employees_SupportPerson">
+          <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Specialties">
+      <EntityTypeMapping TypeName="IsTypeOf(Employee.Specialty)">
+        <MappingFragment StoreEntitySet="Specialties">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Camps">
+      <EntityTypeMapping TypeName="IsTypeOf(Employee.Camp)">
+        <MappingFragment StoreEntitySet="Camps">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Units">
+      <EntityTypeMapping TypeName="IsTypeOf(Employee.Unit)">
+        <MappingFragment StoreEntitySet="Units">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Examinations">
+      <EntityTypeMapping TypeName="IsTypeOf(Employee.Examination)">
+        <MappingFragment StoreEntitySet="Examinations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ranks">
+      <EntityTypeMapping TypeName="IsTypeOf(Employee.Rank)">
+        <MappingFragment StoreEntitySet="Ranks">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Equipments">
+      <EntityTypeMapping TypeName="IsTypeOf(Employee.Equipment)">
+        <MappingFragment StoreEntitySet="Equipments">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CampId" ColumnName="CampId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="MedicSpecialty" TypeName="Employee.MedicSpecialty" StoreEntitySet="Employees_Medic">
+      <EndProperty Name="Specialty">
+        <ScalarProperty Name="Id" ColumnName="Specialty_Id" />
+      </EndProperty>
+      <EndProperty Name="Medic">
+        <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+      </EndProperty>
+      <Condition ColumnName="Specialty_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SoldierExamination" TypeName="Employee.SoldierExamination" StoreEntitySet="Examinations">
+      <EndProperty Name="Soldier">
+        <ScalarProperty Name="JMBG" ColumnName="Soldier_JMBG" />
+      </EndProperty>
+      <EndProperty Name="Examination">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ExaminationMedic" TypeName="Employee.ExaminationMedic" StoreEntitySet="Examinations">
+      <EndProperty Name="Medic">
+        <ScalarProperty Name="JMBG" ColumnName="Medic_JMBG" />
+      </EndProperty>
+      <EndProperty Name="Examination">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ExaminationCamp" TypeName="Employee.ExaminationCamp" StoreEntitySet="Examinations">
+      <EndProperty Name="Camp">
+        <ScalarProperty Name="Id" ColumnName="Camp_Id" />
+      </EndProperty>
+      <EndProperty Name="Examination">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
