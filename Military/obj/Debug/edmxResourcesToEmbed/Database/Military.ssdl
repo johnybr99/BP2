@@ -92,7 +92,8 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="datetime" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateOfExam" Type="datetime" Nullable="false" />
     <Property Name="Soldier_JMBG" Type="nchar" MaxLength="450" Nullable="false" />
     <Property Name="Medic_JMBG" Type="nchar" MaxLength="450" Nullable="false" />
     <Property Name="Camp_Id" Type="int" Nullable="false" />

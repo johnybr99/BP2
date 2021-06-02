@@ -12,6 +12,14 @@ namespace Military
         MilitaryContainer mc = new MilitaryContainer();
         public MainWindow()
         {
+            mc.Ranks.Add(new Rank() { Name = "Corporal" });
+            mc.Ranks.Add(new Rank() { Name = "Lieutenant" });
+            mc.Ranks.Add(new Rank() { Name = "General" });
+            mc.Camps.Add(new Camp());
+            mc.Camps.Add(new Camp());
+            mc.Camps.Add(new Camp());
+            mc.Camps.Add(new Camp());
+            mc.SaveChanges();
             InitializeComponent();
             this.Loaded += (s, e) => { this.DataContext = new MainWindowViewModel(); };
         }

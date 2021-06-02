@@ -97,10 +97,11 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <NavigationProperty Name="Soldier" Relationship="Employee.SoldierExamination" FromRole="Examination" ToRole="Soldier" />
     <NavigationProperty Name="Medic" Relationship="Employee.ExaminationMedic" FromRole="Examination" ToRole="Medic" />
     <NavigationProperty Name="Camp" Relationship="Employee.ExaminationCamp" FromRole="Examination" ToRole="Camp" />
+    <Property Name="DateOfExam" Type="DateTime" Nullable="false" />
   </EntityType>
   <EntityType Name="Rank">
     <Key>

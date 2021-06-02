@@ -65,6 +65,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Employee.Examination)">
         <MappingFragment StoreEntitySet="Examinations">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DateOfExam" ColumnName="DateOfExam" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

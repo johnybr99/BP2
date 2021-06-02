@@ -145,8 +145,10 @@ namespace Military.ViewModels
                 return;
             } else
             {
-                mc.Examinations.Add(new Examination { Camp = CampsSourceSelected, Medic = DoctorsSourceSelected, Soldier = SoldiersSourceSelected, Id = DateTime.Now });
+                var exam = new Examination { DateOfExam = DateTime.Now, Soldier = SoldiersSourceSelected, Medic = DoctorsSourceSelected, Camp = CampsSourceSelected };
+                mc.Examinations.Add(exam);
                 mc.SaveChanges();
+                CloseAction();
             }
         }
 

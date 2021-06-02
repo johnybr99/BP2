@@ -14,7 +14,8 @@ namespace Military.Database
     
     public partial class Examination
     {
-        public System.DateTime Id { get; set; }
+        public int Id { get; set; }
+        public System.DateTime DateOfExam { get; set; }
     
         public virtual Soldier Soldier { get; set; }
         public virtual Medic Medic { get; set; }

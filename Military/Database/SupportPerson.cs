@@ -16,7 +16,7 @@ namespace Military.Database
     {
         public SupportPerson()
         {
-            EmployeeType = EEmployeeType.SupportStaff;
+            EmployeeType = EEmployeeType.SupportStaff;  
         }
     }
 }

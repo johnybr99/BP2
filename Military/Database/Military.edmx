@@ -97,7 +97,8 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="datetime" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateOfExam" Type="datetime" Nullable="false" />
     <Property Name="Soldier_JMBG" Type="nchar" MaxLength="450" Nullable="false" />
     <Property Name="Medic_JMBG" Type="nchar" MaxLength="450" Nullable="false" />
     <Property Name="Camp_Id" Type="int" Nullable="false" />
@@ -388,10 +389,11 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Soldier" Relationship="Employee.SoldierExamination" FromRole="Examination" ToRole="Soldier" />
           <NavigationProperty Name="Medic" Relationship="Employee.ExaminationMedic" FromRole="Examination" ToRole="Medic" />
           <NavigationProperty Name="Camp" Relationship="Employee.ExaminationCamp" FromRole="Examination" ToRole="Camp" />
+          <Property Name="DateOfExam" Type="DateTime" Nullable="false" />
         </EntityType>
         <EntityType Name="Rank">
           <Key>
@@ -537,6 +539,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Employee.Examination)">
         <MappingFragment StoreEntitySet="Examinations">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DateOfExam" ColumnName="DateOfExam" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/02/2021 19:13:38
+-- Date Created: 06/03/2021 00:04:23
 -- Generated from EDMX file: C:\Users\Nikola\Documents\Military\Military\Database\Military.edmx
 -- --------------------------------------------------
 
@@ -126,7 +126,8 @@ GO
 
 -- Creating table 'Examinations'
 CREATE TABLE [dbo].[Examinations] (
-    [Id] datetime  NOT NULL,
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [DateOfExam] datetime  NOT NULL,
     [Soldier_JMBG] nchar(450)  NOT NULL,
     [Medic_JMBG] nchar(450)  NOT NULL,
     [Camp_Id] int  NOT NULL

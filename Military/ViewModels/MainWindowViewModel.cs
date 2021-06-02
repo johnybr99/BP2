@@ -291,21 +291,18 @@ namespace Military.ViewModels
                 }
                 
             }
-            else
+            else if(EmployeeTypesSelected.ID == 1)
             {
-
-                filteredList = mc.Employees.Where(x => (int)x.EmployeeType == employeeTypesSelected.ID && !x.IsDeleted).ToList();
-
-                foreach (var item in filteredList)
+                var supportPersonel = mc.Employees.Where(x => (int)x.EmployeeType ==1 && !x.IsDeleted).ToList();
+                foreach (var item in supportPersonel)
                 {
                     employees.Add(item);
                 }
+            }
+            else
+            {
+                employees = populateEmployeeList();
 
-                if (!filteredList.Any())
-                {
-                    employees = populateEmployeeList();
-
-                }
                 MilitaryComboBoxEnabled = false;
             }
 
